@@ -1,6 +1,7 @@
 import editIcon from "../../assets/edit.png";
 import deleteIcon from "../../assets/delete.png";
 import pinIcon from "../../assets/pin.png";
+import pinnedIcon from "../../assets/pinned.png";
 
 function NoteCard({
     title,
@@ -24,7 +25,10 @@ function NoteCard({
                     className={`icon-btn ${isPinned ? 'text-primary' : 'text-slate-300'}`}
                     onClick={onPinNote}
                 >
-                    <img src={pinIcon} alt="Pin" className="w-8 h-8" />
+                    { isPinned ? 
+                        <img src={pinIcon} alt="Pin" className="w-12 h-9" /> : 
+                        <img src={pinnedIcon} alt="Pin" className="w-12 h-9" />
+                    }
                 </button>
             </div>
 
@@ -37,7 +41,7 @@ function NoteCard({
 
                 <div className="flex items-center gap-2">
                     <button onClick={onEdit} className="icon-btn hover:text-green-600">
-                        <img src={editIcon} alt="Edit" className="w-7 h-7" />
+                        <img src={editIcon} alt="Edit" className="w-10 h-9" />
                     </button>
 
                     <button onClick={onDelete} className="icon-btn hover:text-red-600">
