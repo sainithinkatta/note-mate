@@ -1,5 +1,6 @@
 import axios from 'axios';
-import { BASE_URL } from './constants';
+
+export const BASE_URL = 'http://localhost:8000/api'
 
 const axiosInstance = axios.create({
     baseURL: BASE_URL,
@@ -11,6 +12,7 @@ const axiosInstance = axios.create({
 
 axiosInstance.interceptors.request.use((config) => {
     const accessToken = localStorage.getItem("token");
+
     if (accessToken) {
         config.headers.Authorization = `Bearer ${accessToken}`
     }
@@ -19,7 +21,6 @@ axiosInstance.interceptors.request.use((config) => {
     (error) => {
         return Promise.reject(error);
     }
-
 );
 
 export default axiosInstance;
