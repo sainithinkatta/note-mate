@@ -7,18 +7,13 @@ function AddEditNotes({
     getAllNotes,
     onClose,
     type
-}) {
-
-    console.log(noteData);
-    
+}) {    
     const [title, setTitle] = useState('');
     const [content, setContent] = useState('');
     const [tags, setTags] = useState([]);
     const [error, setError] = useState('');
 
-    useEffect(() => {
-        console.log(typeof noteData);
-        
+    useEffect(() => {        
         if (noteData) {
             setTitle(noteData.title || '');
             setContent(noteData.content || '');

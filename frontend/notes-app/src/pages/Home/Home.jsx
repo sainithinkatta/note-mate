@@ -1,5 +1,6 @@
 import Navbar from '../../components/Navbar/Navbar';
 import NoteCard from '../../components/Cards/NoteCard';
+import ToastMessage from '../../components/ToastMessage';
 import AddEditNotes from './AddEditNotes';
 import Modal from '../../components/Modal/Modal';
 import { useEffect, useState } from 'react';
@@ -17,6 +18,7 @@ function Home() {
     const [allNotes, setAllNotes] = useState([]);
     const [error, setError] = useState('');
     const [userInfo, setUserInfo] = useState(null);
+    const [toastMessage, setToastMessage] = useState('');
 
     function handleModalClose() {
         setOpenAddEditModal({
@@ -64,6 +66,23 @@ function Home() {
         });
     }
 
+    async function deleteNote(note) {
+        try {
+            const response = await axiosInstance.delete(`/notes/${note._id}`);
+
+            if (response.data && response.data.notes) {
+                setToastMessage('Note Deleted successfully');
+                getAllNotes();
+            }
+        } catch (error) {
+            if (error.response && error.response.data && error.response.data.message) {
+                setError(error.response.data.message);
+            } else {
+                setError("An unexpected error occurred. Please try again later.");
+            }
+        }
+    }
+
     useEffect(() => {
         getUserInfo();
     }, [])
@@ -73,6 +92,14 @@ function Home() {
             <Navbar userInfo={userInfo}/>
 
             { error && <p className="text-red-500 text-xs pt-4 text-center">{error}</p> }
+            
+            {
+                toastMessage && 
+                <ToastMessage 
+                    toastMessage={toastMessage} 
+                    onClose={() => setToastMessage('')} 
+                />
+            }
 
             <div className="container mx-auto">
                 <div className="grid grid-cols-3 gap-4 mt-8">
@@ -81,7 +108,7 @@ function Home() {
                             key={note._id}
                             note={note}
                             onEdit={handleNoteEdit}
-                            onDelete={() => {}}
+                            onDelete={deleteNote}
                             onPinNote={() => {}}
                         />
                     ))}

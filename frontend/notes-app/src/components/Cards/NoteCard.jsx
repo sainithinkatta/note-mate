@@ -50,7 +50,12 @@ function NoteCard({
                         <img src={editIcon} alt="Edit" className="w-10 h-9" />
                     </button>
 
-                    <button onClick={onDelete} className="icon-btn hover:text-red-600">
+                    <button 
+                        className="icon-btn hover:text-red-600"
+                        onClick={() => {
+                            onDelete(note)
+                        }}
+                    >
                         <img src={deleteIcon} alt="Delete" className="w-7 h-7" />
                     </button>
                 </div>
