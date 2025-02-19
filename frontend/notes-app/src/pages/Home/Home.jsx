@@ -14,6 +14,8 @@ function Home() {
         data: null,
     });
 
+    const [allNotes, setAllNotes] = useState([]);
+    const [error, setError] = useState('');
     const [userInfo, setUserInfo] = useState(null);
 
     function handleModalClose() {
@@ -28,10 +30,28 @@ function Home() {
             if (response.data && response.data.user) {
                 setUserInfo(response.data.user);
             }
+
+            getAllNotes();
         } catch (error) {
             if (error.response.status === 401) {
                 localStorage.clear();
                 navigate('/login');
+            }
+        }
+    }
+
+    async function getAllNotes() {
+        try {
+            const response = await axiosInstance.get("/notes");
+    
+            if (response.data && response.data.notes) {
+                setAllNotes(response.data.notes);
+            }
+        } catch (error) {
+            if (error.response && error.response.data && error.response.data.message) {
+                setError(error.response.data.message);
+            } else {
+                setError("An unexpected error occurred. Please try again later.");
             }
         }
     }
@@ -44,18 +64,19 @@ function Home() {
         <>
             <Navbar userInfo={userInfo}/>
 
+            { error && <p className="text-red-500 text-xs pt-4 text-center">{error}</p> }
+
             <div className="container mx-auto">
                 <div className="grid grid-cols-3 gap-4 mt-8">
-                    <NoteCard
-                        title="Meeting on 7th April"
-                        date="3rd April 2024"
-                        content="Meeting on 7th April"
-                        tags="#Meeting"
-                        isPinned={true}
-                        onEdit={() => {}}
-                        onDelete={() => {}}
-                        onPinNote={() => {}}
-                    />
+                    {allNotes.map((note) => (
+                        <NoteCard
+                            key={note._id}
+                            note={note}
+                            onEdit={() => {}}
+                            onDelete={() => {}}
+                            onPinNote={() => {}}
+                        />
+                    ))}
                 </div>
             </div>
 
@@ -92,6 +113,7 @@ function Home() {
                             data: null,
                         });
                     }}
+                    getAllNotes={getAllNotes}
                 />
             </Modal>
         </>

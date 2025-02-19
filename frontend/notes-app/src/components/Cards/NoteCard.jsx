@@ -4,40 +4,41 @@ import pinIcon from "../../assets/pin.png";
 import pinnedIcon from "../../assets/pinned.png";
 
 function NoteCard({
-    title,
-    date,
-    content,
-    tags,
-    isPinned,
+    note,
     onEdit,
     onDelete,
     onPinNote
-}) {
+}) {    
     return (
         <div className="border rounded p-4 bg-white hover:shadow-xl transition-all ease-in-out">
             <div className="flex items-center justify-between">
                 <div>
-                    <h6 className="text-sm font-medium">{title}</h6>
-                    <span className="text-xs text-slate-500">{date}</span>
+                    <h6 className="text-sm font-medium">{note.title}</h6>
                 </div>
 
                 <button
-                    className={`icon-btn ${isPinned ? 'text-primary' : 'text-slate-300'}`}
+                    className={`icon-btn ${note.isPinned ? 'text-primary' : 'text-slate-300'}`}
                     onClick={onPinNote}
                 >
-                    { isPinned ? 
-                        <img src={pinIcon} alt="Pin" className="w-12 h-9" /> : 
-                        <img src={pinnedIcon} alt="Pin" className="w-12 h-9" />
-                    }
+                <img 
+                    src={note.isPinned ? pinnedIcon: pinIcon} 
+                    alt="Pin" 
+                    className="w-12 h-9" 
+                />
                 </button>
+
             </div>
 
             <p className="text-xs text-slate-600 mt-2">
-                {content?.slice(0, 60)}
+                {note.content?.slice(0, 60)}
             </p>
 
             <div className="flex items-center justify-between mt-2">
-                <div className="text-xs text-slate-500">{tags}</div>
+                <div className="text-xs text-slate-500">
+                    {
+                        note.tags.map((tag) => `#${tag} `)
+                    }
+                </div>
 
                 <div className="flex items-center gap-2">
                     <button onClick={onEdit} className="icon-btn hover:text-green-600">
