@@ -83,6 +83,25 @@ function Home() {
         }
     }
 
+    async function toogleNotePin(note) {
+        try {
+            const response = await axiosInstance.put(`/notes/${note._id}/pin`, {
+                isPinned: !note.isPinned
+            });
+
+            if (response.data && response.data.note) {
+                setToastMessage('Pin Updated successfully');
+                getAllNotes();
+            }
+        } catch (error) {
+            if (error.response && error.response.data && error.response.data.message) {
+                setError(error.response.data.message);
+            } else {
+                setError("An unexpected error occurred. Please try again later.");
+            }
+        }
+    }
+
     useEffect(() => {
         getUserInfo();
     }, [])
@@ -109,7 +128,7 @@ function Home() {
                             note={note}
                             onEdit={handleNoteEdit}
                             onDelete={deleteNote}
-                            onPinNote={() => {}}
+                            onPinNote={toogleNotePin}
                         />
                     ))}
                 </div>

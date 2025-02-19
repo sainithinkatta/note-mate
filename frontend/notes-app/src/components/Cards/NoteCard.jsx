@@ -18,7 +18,9 @@ function NoteCard({
 
                 <button
                     className={`icon-btn ${note.isPinned ? 'text-primary' : 'text-slate-300'}`}
-                    onClick={onPinNote}
+                    onClick={() => {
+                        onPinNote(note)
+                    }}
                 >
                 <img 
                     src={note.isPinned ? pinnedIcon: pinIcon} 
