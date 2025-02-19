@@ -56,6 +56,14 @@ function Home() {
         }
     }
 
+    function handleNoteEdit (note) {
+        setOpenAddEditModal({
+            isShown: true,
+            type: 'edit',
+            data: note,
+        });
+    }
+
     useEffect(() => {
         getUserInfo();
     }, [])
@@ -72,7 +80,7 @@ function Home() {
                         <NoteCard
                             key={note._id}
                             note={note}
-                            onEdit={() => {}}
+                            onEdit={handleNoteEdit}
                             onDelete={() => {}}
                             onPinNote={() => {}}
                         />
@@ -106,6 +114,8 @@ function Home() {
             >
                 <AddEditNotes
                     noteData={openAddEditModal.data}
+                    getAllNotes={getAllNotes}
+                    type={openAddEditModal.type}
                     onClose={() => {
                         setOpenAddEditModal({
                             isShown: false,
@@ -113,7 +123,6 @@ function Home() {
                             data: null,
                         });
                     }}
-                    getAllNotes={getAllNotes}
                 />
             </Modal>
         </>

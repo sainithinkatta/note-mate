@@ -1,16 +1,30 @@
 import TagInput from '../../components/Input/TagInput';
-import { useState } from 'react';
-import  axiosInstance from "../../utils/axiosInstance";
+import { useState, useEffect } from 'react';
+import axiosInstance from "../../utils/axiosInstance";
 
 function AddEditNotes({ 
-    noteData,
+    noteData = {},
     getAllNotes,
-    onClose
+    onClose,
+    type
 }) {
+
+    console.log(noteData);
+    
     const [title, setTitle] = useState('');
     const [content, setContent] = useState('');
     const [tags, setTags] = useState([]);
     const [error, setError] = useState('');
+
+    useEffect(() => {
+        console.log(typeof noteData);
+        
+        if (noteData) {
+            setTitle(noteData.title || '');
+            setContent(noteData.content || '');
+            setTags(noteData.tags || []);
+        }
+    }, [noteData]);
 
     async function addNewNote() {
         try {
@@ -33,10 +47,28 @@ function AddEditNotes({
         }
     }
 
-    // async function updateNewNote() {
-    // }
+    async function updateNote() {
+        try {
+            const response = await axiosInstance.put(`/notes/${noteData._id}`, {
+                title,
+                content,
+                tags,
+            });
 
-    function handleAddNote() {
+            if (response.data && response.data.note) {
+                getAllNotes();
+                onClose();
+            }
+        } catch (error) {
+            if (error.response && error.response.data && error.response.data.message) {
+                setError(error.response.data.message);
+            } else {
+                setError("An unexpected error occurred. Please try again later.");
+            }
+        }
+    }
+
+    function handleSaveNote() {
         if (!title) {
             setError('Please enter the title');
             return;
@@ -47,7 +79,9 @@ function AddEditNotes({
             return;
         }
 
-        addNewNote();
+        setError('');
+
+        type === 'edit' ? updateNote() :  addNewNote();
     }
 
     return (
@@ -59,9 +93,7 @@ function AddEditNotes({
                     className="text-2xl text-slate-950 outline-none"
                     placeholder="Go To Gym at 5"
                     value={title}
-                    onChange={({ target }) => {
-                        setTitle(target.value);
-                    }}
+                    onChange={({ target }) => setTitle(target.value)}
                 />
             </div>
 
@@ -73,9 +105,7 @@ function AddEditNotes({
                     placeholder="Content"
                     rows={10}
                     value={content}
-                    onChange={({ target }) => {
-                        setContent(target.value);
-                    }}
+                    onChange={({ target }) => setContent(target.value)}
                 />
             </div>
 
@@ -88,9 +118,9 @@ function AddEditNotes({
 
             <button
                 className="btn-primary font-medium mt-5 p-3"
-                onClick={handleAddNote}
+                onClick={handleSaveNote}
             >
-                ADD
+                { type === 'edit' ? 'Edit' : 'Add' }
             </button>
         </div>
     );

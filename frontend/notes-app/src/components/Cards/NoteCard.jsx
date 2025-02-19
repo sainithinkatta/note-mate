@@ -41,7 +41,12 @@ function NoteCard({
                 </div>
 
                 <div className="flex items-center gap-2">
-                    <button onClick={onEdit} className="icon-btn hover:text-green-600">
+                    <button 
+                        className="icon-btn hover:text-green-600"
+                        onClick={() =>{
+                            onEdit(note)
+                        }} 
+                    >
                         <img src={editIcon} alt="Edit" className="w-10 h-9" />
                     </button>
 
