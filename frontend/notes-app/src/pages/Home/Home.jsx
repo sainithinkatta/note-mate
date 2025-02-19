@@ -1,5 +1,6 @@
 import Navbar from '../../components/Navbar/Navbar';
 import NoteCard from '../../components/Cards/NoteCard';
+import EmptyCard from '../../components/Cards/EmptyCard';
 import ToastMessage from '../../components/ToastMessage';
 import AddEditNotes from './AddEditNotes';
 import Modal from '../../components/Modal/Modal';
@@ -121,17 +122,24 @@ function Home() {
             }
 
             <div className="container mx-auto">
-                <div className="grid grid-cols-3 gap-4 mt-8">
-                    {allNotes.map((note) => (
-                        <NoteCard
-                            key={note._id}
-                            note={note}
-                            onEdit={handleNoteEdit}
-                            onDelete={deleteNote}
-                            onPinNote={toogleNotePin}
-                        />
-                    ))}
-                </div>
+                {
+                    allNotes.length > 0 ? (
+                        <div className="grid grid-cols-3 gap-4 mt-8">
+                            {allNotes.map((note) => (
+                                <NoteCard
+                                    key={note._id}
+                                    note={note}
+                                    onEdit={handleNoteEdit}
+                                    onDelete={deleteNote}
+                                    onPinNote={toogleNotePin}
+                                />
+                            ))}
+                        </div>
+                    ) :
+                    (
+                        <EmptyCard/>
+                    )
+                }
             </div>
 
             <button
