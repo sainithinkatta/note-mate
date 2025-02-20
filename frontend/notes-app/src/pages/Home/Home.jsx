@@ -111,7 +111,7 @@ function Home() {
             });
 
             if (response.data && response.data.note) {
-                setToastMessage('Pin Updated successfully');
+                setToastMessage('Note updated successfully');
                 getAllNotes();
             }
         } catch (error) {
