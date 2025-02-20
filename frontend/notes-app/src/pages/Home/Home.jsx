@@ -27,14 +27,34 @@ function Home() {
         });
     }
 
+    async function onSearchNote(query) {
+        try {
+            const response = await axiosInstance.get('/notes/search', {
+                params: { query }
+            });
+    
+            if (response.data && response.data.notes) {
+                if (!response.data.notes.length) {
+                    setToastMessage('No Results Found');
+                }
+    
+                setAllNotes(response.data.notes);
+            }
+        } catch (error) {
+            if (error.response && error.response.data && error.response.data.message) {
+                setError(error.response.data.message);
+            } else {
+                setError("An unexpected error occurred. Please try again later.");
+            }
+        }
+    }
+
     async function getUserInfo () {
         try {
             const response = await axiosInstance.get('/get-user');
             if (response.data && response.data.user) {
                 setUserInfo(response.data.user);
             }
-
-            getAllNotes();
         } catch (error) {
             if (error.response.status === 401) {
                 localStorage.clear();
@@ -105,11 +125,12 @@ function Home() {
 
     useEffect(() => {
         getUserInfo();
+        getAllNotes();
     }, [])
 
     return (
         <>
-            <Navbar userInfo={userInfo}/>
+            <Navbar userInfo={userInfo} onSearchNote={onSearchNote}/>
 
             { error && <p className="text-red-500 text-xs pt-4 text-center">{error}</p> }
             

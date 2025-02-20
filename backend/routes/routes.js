@@ -10,7 +10,8 @@ const {
     editNote,
     getAllNotes,
     deleteNote,
-    toggleNotePin
+    toggleNotePin,
+    searchNotes
 } = require("../controllers/controller");
 
 const router = express.Router();
@@ -23,5 +24,6 @@ router.put("/notes/:noteId", authenticateToken, editNote);
 router.get("/notes", authenticateToken, getAllNotes);
 router.delete("/notes/:noteId", authenticateToken, deleteNote);
 router.put("/notes/:noteId/pin", authenticateToken, toggleNotePin);
+router.get("/notes/search", authenticateToken, searchNotes);
 
 module.exports = router;

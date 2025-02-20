@@ -2,8 +2,9 @@ import { useState } from "react";
 import ProfileInfo from "../Cards/ProfileInfo";
 import SearchBar from "../SearchBar/SearchBar";
 import { useNavigate } from "react-router-dom";
+import { debounce } from 'lodash';
 
-function Navbar({ userInfo }) {
+function Navbar({ userInfo, onSearchNote }) {
     const [searchQuery, setSearchQuery] = useState("");
     const navigate = useNavigate();
 
@@ -13,12 +14,18 @@ function Navbar({ userInfo }) {
     }
 
     function handleSearch() {
-        // handle search logic...
+        if (searchQuery) {
+            onSearchNote(searchQuery)
+        }
     }
 
     function onClearSearch() {
         setSearchQuery("");
     }
+
+    const onSearch = debounce((value) => {
+        setSearchQuery(value);
+    }, 300);
 
     return (
         <div className="bg-white flex items-center justify-between px-6 py-2 drop-shadow">
@@ -30,6 +37,7 @@ function Navbar({ userInfo }) {
                         value={searchQuery}
                         onChange={({ target }) => {
                             setSearchQuery(target.value);
+                            onSearch(target.value);
                         }}
                         handleSearch={handleSearch}
                         onClearSearch={onClearSearch}
