@@ -2,6 +2,7 @@ import editIcon from "../../assets/edit.png";
 import deleteIcon from "../../assets/delete.png";
 import pinIcon from "../../assets/pin.png";
 import pinnedIcon from "../../assets/pinned.png";
+import ToolTip from '../../components/ToolTip';
 
 function NoteCard({
     note,
@@ -16,18 +17,20 @@ function NoteCard({
                     <h6 className="text-sm font-medium">{note.title}</h6>
                 </div>
 
-                <button
-                    className={`icon-btn ${note.isPinned ? 'text-primary' : 'text-slate-300'}`}
-                    onClick={() => {
-                        onPinNote(note)
-                    }}
-                >
-                <img 
-                    src={note.isPinned ? pinnedIcon: pinIcon} 
-                    alt="Pin" 
-                    className="w-12 h-9" 
-                />
-                </button>
+                <ToolTip tooltip={note.isPinned ? 'Unpin': 'Pin'}>
+                    <button
+                        className={`icon-btn ${note.isPinned ? 'text-primary' : 'text-slate-300'}`}
+                        onClick={() => {
+                            onPinNote(note)
+                        }}
+                    >
+                        <img 
+                            src={note.isPinned ? pinnedIcon: pinIcon}
+                            alt="Pin" 
+                            className="w-12 h-9" 
+                        />
+                    </button>
+                </ToolTip>
 
             </div>
 
@@ -43,23 +46,27 @@ function NoteCard({
                 </div>
 
                 <div className="flex items-center gap-2">
-                    <button 
-                        className="icon-btn hover:text-green-600"
-                        onClick={() =>{
-                            onEdit(note)
-                        }} 
-                    >
-                        <img src={editIcon} alt="Edit" className="w-10 h-9" />
-                    </button>
+                    <ToolTip tooltip="Edit">
+                        <button 
+                            className="icon-btn hover:text-green-600"
+                            onClick={() =>{
+                                onEdit(note)
+                            }} 
+                        >
+                            <img src={editIcon} alt="Edit" className="w-10 h-9" />
+                        </button>
+                    </ToolTip>
 
-                    <button 
-                        className="icon-btn hover:text-red-600"
-                        onClick={() => {
-                            onDelete(note)
-                        }}
-                    >
-                        <img src={deleteIcon} alt="Delete" className="w-7 h-7" />
-                    </button>
+                    <ToolTip tooltip="Delete">
+                        <button 
+                            className="icon-btn hover:text-red-600"
+                            onClick={() => {
+                                onDelete(note)
+                            }}
+                        >
+                            <img src={deleteIcon} alt="Delete" className="w-7 h-7" />
+                        </button>
+                    </ToolTip>
                 </div>
             </div>
         </div>
