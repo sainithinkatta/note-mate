@@ -6,7 +6,8 @@ function AddEditNotes({
     noteData = {},
     getAllNotes,
     onClose,
-    type
+    type,
+    setToastMessage
 }) {    
     const [title, setTitle] = useState('');
     const [content, setContent] = useState('');
@@ -31,6 +32,8 @@ function AddEditNotes({
     
             if (response.data && response.data.note) {
                 getAllNotes();
+                setToastMessage('New Note added Successfully');
+                
                 onClose();
             }
         } catch (error) {
@@ -52,8 +55,11 @@ function AddEditNotes({
 
             if (response.data && response.data.note) {
                 getAllNotes();
+                setToastMessage('Note updated Successfully');
+
                 onClose();
             }
+
         } catch (error) {
             if (error.response && error.response.data && error.response.data.message) {
                 setError(error.response.data.message);

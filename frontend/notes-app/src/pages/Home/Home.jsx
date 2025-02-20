@@ -191,6 +191,7 @@ function Home() {
                     noteData={openAddEditModal.data}
                     getAllNotes={getAllNotes}
                     type={openAddEditModal.type}
+                    setToastMessage={setToastMessage}
                     onClose={() => {
                         setOpenAddEditModal({
                             isShown: false,
