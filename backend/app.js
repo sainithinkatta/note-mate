@@ -17,4 +17,13 @@ connectDB();
 // Routes
 app.use("/api", authRoutes);
 
+app.get('/', (req, res) => {
+    res.send('Server is running');
+});
+
+// Add error handling
+app.use((req, res) => {
+    res.status(404).json({ message: 'Route not found' });
+});
+
 module.exports = app;
