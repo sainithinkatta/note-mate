@@ -9,13 +9,6 @@ function ToastMessage({
     useEffect(() => {
         if (toastMessage) {
             setVisible(true);
-
-            const timer = setTimeout(() => {
-                setVisible(false);
-                onClose?.();
-            }, 3000);
-
-            return () => clearTimeout(timer);
         }
     }, [toastMessage, onClose]);
 
