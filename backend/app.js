@@ -9,7 +9,7 @@ const app = express();
 
 // Middleware
 app.use(express.json());
-app.use(cors({ origin: '*' }));
+app.use(cors({ origin: 'https://note-mate-two.vercel.app/' }));
 
 // Database Connection
 connectDB();

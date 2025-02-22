@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-export const BASE_URL = 'http://localhost:8000/api'
+export const BASE_URL = 'https://note-mate-two.vercel.app/api'
 
 const axiosInstance = axios.create({
     baseURL: BASE_URL,
