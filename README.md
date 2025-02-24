@@ -2,9 +2,9 @@
 
 ## 1. Project Overview
 
-**NoteMate** is a full-stack application built using the **MERN stack** (MongoDB, Express.js, React.js, Node.js) that enables users to securely sign up, log in, and manage their notes. The platform allows users to create, edit, update, and delete notes with ease, offering rich text formatting and categorization options. 
+**NoteMate** is a full-stack application built using the **MERN stack** (MongoDB, Express.js, React.js, Node.js) that enables users to securely sign up, log in, and manage their notes. The platform allows users to create, edit, update, and delete notes with ease.
 
-The app features a dynamic, responsive front-end built with React.js, leveraging React Router for smooth navigation and Context API for global state management. The backend is powered by Express.js, with RESTful API routes to handle authentication (using JWT tokens for secure login), CRUD operations for notes, and user session management.
+The app features a dynamic, responsive front-end built with React.js, leveraging React Router for smooth navigation. The backend is powered by Express.js, with RESTful API routes to handle authentication (using JWT tokens for secure login), CRUD operations for notes, and user session management.
 
 MongoDB serves as the database for persistent storage of user credentials and notes data, utilizing Mongoose for schema validation and efficient query handling. NoteMate also includes functionality to pin important notes to the homepage for quick access, ensuring a streamlined and personalized user experience.
 
@@ -13,7 +13,6 @@ Key Features:
 - **Note Management**: Create, edit, update, and delete notes with rich text formatting and categorization.
 - **Pin Notes**: Users can pin important notes to the homepage for easy access.
 - **Responsive UI**: Built with React.js and styled with TailwindCSS for a dynamic and mobile-responsive front-end.
-- **Global State Management**: Uses React Context API for managing the global state across the app.
 
 The backend is powered by **Express.js**, offering RESTful API routes for user authentication, CRUD operations on notes, and session management. **MongoDB** serves as the database for storing user credentials and note data, with **Mongoose** handling schema validation and efficient querying.
 
@@ -138,10 +137,4 @@ Ensure you have the following installed:
 Here's a contributors section to include in your README:
 
 ## Contributors
-<table>
-  <tr>
-    <td align="center">
-      <b>Sai Nithin</b>
-    </td>
-  </tr>
-</table>
+Sai Nithin Reddy Katta.
