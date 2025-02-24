@@ -141,9 +141,7 @@ Here's a contributors section to include in your README:
 <table>
   <tr>
     <td align="center">
-      <a href="https://github.com/sainithinkatta" />
-        <sub><b>Sai Nithin</b></sub>
-      </a>
+      <b>Sai Nithin</b>
     </td>
   </tr>
 </table>
