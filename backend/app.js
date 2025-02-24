@@ -10,13 +10,9 @@ const app = express();
 // Middleware
 app.use(express.json());
 
-// Handle preflight requests
-app.options('*', cors());
-
 app.use(cors({
     origin: ['https://notemate-app.vercel.app', 'http://localhost:5173'],
     methods: ['GET', 'POST', 'PUT', 'DELETE'],
-    allowedHeaders: ['Content-Type', 'Authorization'],
     credentials: true
 }));
 
