@@ -22,7 +22,7 @@ connectDB();
 app.use("/api", authRoutes);
 
 app.get('/', (req, res) => {
-    res.send('Server is running');
+    res.send('NoteMate is running');
 });
 
 // Add error handling
