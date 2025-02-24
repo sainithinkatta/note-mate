@@ -10,7 +10,7 @@ function Navbar({ userInfo, onSearchNote }) {
 
     function onLogout() {
         localStorage.clear();
-        navigate("/login");
+        navigate("/");
     }
 
     function handleSearch() {

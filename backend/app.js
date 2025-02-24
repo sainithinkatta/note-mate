@@ -8,7 +8,8 @@ const authRoutes = require("./routes/routes");
 const app = express();
 
 app.use(cors({ 
-    origin: 'https://notemate-app.vercel.app',
+    origin: ['https://notemate-app.vercel.app'],
+    methods: ["GET", "POST", "PUT", "DELETE"],
     credentials: true,
 }));
 

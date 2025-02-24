@@ -1,6 +1,7 @@
 const User = require("../models/user.model");
 const Notes = require("../models/note.model");
 const jwt = require("jsonwebtoken");
+const bcrypt = require("bcryptjs");
 
 // User Create Account API
 const createAccount = async (req, res) => {
@@ -22,7 +23,16 @@ const createAccount = async (req, res) => {
         });
     }
 
-    const user = new User({ fullName, email, password });
+    // Hashing password
+    const value = await bcrypt.genSalt(10);
+    const hashedPassword = await bcrypt.hash(password, value);
+
+    const user = new User({ 
+        fullName,
+        email,
+        password: hashedPassword 
+    });
+
     await user.save();
 
     const accessToken = jwt.sign(
