@@ -10,7 +10,7 @@ const app = express();
 // Middleware
 app.use(express.json());
 app.use(cors({
-    origin: ['https://note-mate-two.vercel.app', 'http://localhost:5173'],
+    origin: ['https://notemate-app.vercel.app', 'http://localhost:5173'],
     methods: ['GET', 'POST', 'PUT', 'DELETE'],
     credentials: true
 }));
