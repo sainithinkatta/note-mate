@@ -5,7 +5,7 @@ export const BASE_URL = 'https://notemate-backend.vercel.app/api'
 const axiosInstance = axios.create({
     baseURL: BASE_URL,
     timeout: 10000,
-    withCredentials: true,  // Add this
+    withCredentials: true,
     headers: {
         'Content-Type': 'application/json',
         'Accept': 'application/json'
