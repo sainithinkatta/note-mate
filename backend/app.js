@@ -12,8 +12,6 @@ app.use(cors({
     credentials: true,
 }));
 
-app.use(cors(corsOptions));
-
 // Middleware
 app.use(express.json({ limit: "25mb" }));
 
