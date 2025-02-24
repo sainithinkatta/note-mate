@@ -141,9 +141,7 @@ Here's a contributors section to include in your README:
 <table>
   <tr>
     <td align="center">
-      <a href="https://github.com/[your-username]">
-        <img src="https://github.com/[your-username].png" width="100px;" alt="Your Name"/>
-        <br />
+      <a href="https://github.com/sainithinkatta" />
         <sub><b>Sai Nithin</b></sub>
       </a>
     </td>
