@@ -7,11 +7,13 @@ const authRoutes = require("./routes/routes");
 
 const app = express();
 
-app.use(cors({ 
-    origin: ['https://notemate-app.vercel.app'],
-    methods: ["GET", "POST", "PUT", "DELETE"],
+const corsOptions = {
+    origin: ['http://localhost:5173'],
     credentials: true,
-}));
+};
+
+// Use CORS with the above options
+app.use(cors(corsOptions));
 
 // Middleware
 app.use(express.json({ limit: "25mb" }));
@@ -23,7 +25,7 @@ connectDB();
 app.use("/api", authRoutes);
 
 app.get('/', (req, res) => {
-    res.send('NoteMate is running');
+    res.send('NoteMate backend is running');
 });
 
 // Add error handling
