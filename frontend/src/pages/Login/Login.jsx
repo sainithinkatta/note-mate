@@ -1,18 +1,23 @@
 import Navbar from "../../components/Navbar/Navbar";
 import PasswordInput from "../../components/Input/PasswordInput";
 import { Link } from "react-router-dom";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { validateEmail } from "../../utils/helper";
-import  axiosInstance from "../../utils/axiosInstance";
-
-import { useNavigate } from 'react-router-dom';
-
+import axiosInstance from "../../utils/axiosInstance";
+import { useNavigate } from "react-router-dom";
+import GuestLoginModal from "../../components/GuestLoginModal";
 
 function Login() {
     const navigate = useNavigate();
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [error, setError] = useState(null);
+    const [showGuestModal, setShowGuestModal] = useState(true); // State to control modal visibility
+
+    useEffect(() => {
+        // You can trigger this only once when the component is mounted
+        setShowGuestModal(true);
+    }, []);
 
     async function handleLogin(e) {
         e.preventDefault();
@@ -33,26 +38,33 @@ function Login() {
             const response = await axiosInstance.post("/login", {
                 email: email,
                 password: password
-            })
+            });
 
             if (response.data && response.data.accessToken) {
-                localStorage.setItem("token", response.data.accessToken)
-                
-                navigate('/dashboard')
+                localStorage.setItem("token", response.data.accessToken);
+                navigate("/dashboard");
             }
         } catch (error) {
             if (error.response && error.response.data && error.response.data.message) {
-                setError(error.response.data.message)
+                setError(error.response.data.message);
             } else {
-                setError("An unexpected error occurred. Please try again later.")
+                setError("An unexpected error occurred. Please try again later.");
             }
-            
         }
     }
 
     return (
         <>
             <Navbar />
+
+            {/* Conditionally render the modal */}
+            {showGuestModal && (
+                <GuestLoginModal
+                    onClose={() => setShowGuestModal(false)}
+                    guestEmail="guest@example.com"
+                    guestPassword="guest123"
+                />
+            )}
 
             <div className="flex items-center justify-center mt-28">
                 <div className="w-96 border rounded bg-white px-7 py-10">

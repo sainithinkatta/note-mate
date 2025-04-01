@@ -51,8 +51,6 @@ const createAccount = async (req, res) => {
 
 // User Login API
 const login = async (req, res) => {
-    console.log('Logged In');
-
     const { email, password } = req.body;
 
     if (!email || !password) {
@@ -62,9 +60,9 @@ const login = async (req, res) => {
         });
     }
 
-    const userInfo = await User.findOne({ email });
+    const userInfo = await User.findOne({ email }).select('+password');
 
-    if (!userInfo || userInfo.password !== password) {
+    if (!userInfo || !(await bcrypt.compare(password, userInfo.password))) {
         return res.status(400).json({
             error: true,
             message: "Invalid Credentials"
