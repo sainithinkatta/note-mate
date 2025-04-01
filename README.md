@@ -1,5 +1,7 @@
 # NoteMate
 
+The project is now live! You can check it out here: [NoteMate - Live](https://note-mate-zeta.vercel.app/)
+
 ## 1. Project Overview
 
 **NoteMate** is a full-stack application built using the **MERN stack** (MongoDB, Express.js, React.js, Node.js) that enables users to securely sign up, log in, and manage their notes. The platform allows users to create, edit, update, and delete notes with ease.
