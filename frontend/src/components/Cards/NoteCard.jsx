@@ -1,7 +1,4 @@
-import editIcon from "../../assets/edit.png";
-import deleteIcon from "../../assets/delete.png";
-import pinIcon from "../../assets/pin.png";
-import pinnedIcon from "../../assets/pinned.png";
+import { FaEdit, FaTrash, FaThumbtack } from "react-icons/fa";
 import ToolTip from '../../components/ToolTip';
 
 function NoteCard({
@@ -16,16 +13,12 @@ function NoteCard({
                 <div>
                     <h6 className="text-sm font-medium text-slate-800 dark:text-gray-200">{note.title}</h6>
                 </div>
-                <ToolTip tooltip={note.isPinned ? 'Unpin': 'Pin'}>
+                <ToolTip tooltip={note.isPinned ? 'Unpin' : 'Pin'}>
                     <button
                         className={`icon-btn ${note.isPinned ? 'text-primary' : 'text-slate-300'}`}
                         onClick={() => onPinNote(note)}
                     >
-                        <img 
-                            src={note.isPinned ? pinnedIcon: pinIcon}
-                            alt="Pin" 
-                            className="w-12 h-9" 
-                        />
+                        <FaThumbtack className="w-5 h-5" />
                     </button>
                 </ToolTip>
             </div>
@@ -45,7 +38,7 @@ function NoteCard({
                             className="icon-btn hover:text-green-600"
                             onClick={() => onEdit(note)}
                         >
-                            <img src={editIcon} alt="Edit" className="w-10 h-9" />
+                            <FaEdit className="w-5 h-5" />
                         </button>
                     </ToolTip>
 
@@ -54,7 +47,7 @@ function NoteCard({
                             className="icon-btn hover:text-red-600"
                             onClick={() => onDelete(note)}
                         >
-                            <img src={deleteIcon} alt="Delete" className="w-7 h-7" />
+                            <FaTrash className="w-5 h-5" />
                         </button>
                     </ToolTip>
                 </div>
