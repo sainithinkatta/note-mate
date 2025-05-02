@@ -13,18 +13,17 @@ function SearchBar({
     };
 
     return (
-        <div className="w-80 flex items-center px-4 bg-slate-100 rounded-md">
+        <div className="w-80 flex items-center px-4 bg-slate-100 dark:bg-gray-700 rounded-md">
             <input
                 type="text"
                 placeholder="Search Notes"
-                className="w-full text-xs bg-transparent py-[11px] outline-none"
+                className="w-full text-xs bg-transparent py-[11px] outline-none text-slate-800 dark:text-gray-100"
                 value={value}
                 onChange={onChange}
                 onKeyDown={handleKeyDown}
             />
-
             <FaMagnifyingGlass
-                className="text-slate-400 cursor-pointer hover:text-black"
+                className="text-slate-400 dark:text-gray-300 cursor-pointer hover:text-black"
                 onClick={handleSearch}
             />
         </div>

@@ -21,13 +21,17 @@ function GuestLoginModal({
 
     return (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
-            <div className="bg-white p-6 rounded shadow-lg max-w-sm w-full">
-                <h3 className="text-lg font-semibold mb-4">Guest Login Details</h3>
-                <p className="mb-4">You can use the following credentials to try out our website:</p>
+            <div className="bg-white dark:bg-gray-800 p-6 rounded shadow-lg max-w-sm w-full">
+                <h3 className="text-lg font-semibold mb-4 text-slate-800 dark:text-gray-100">
+                    Guest Login Details
+                </h3>
+                <p className="mb-4 text-slate-700 dark:text-gray-300">
+                    You can use the following credentials to try out our website:
+                </p>
                 
                 <div className="mb-4 flex items-center">
-                    <strong className="mr-2">Email:</strong>
-                    <span>{guestEmail}</span>
+                    <strong className="mr-2 text-slate-800 dark:text-gray-200">Email:</strong>
+                    <span className="text-slate-800 dark:text-gray-100">{guestEmail}</span>
                     <button
                         className="ml-2 text-gray-500"
                         onClick={() => handleCopy(guestEmail, 'email')}
@@ -42,8 +46,8 @@ function GuestLoginModal({
                 </div>
                 
                 <div className="mb-4 flex items-center">
-                    <strong className="mr-2">Password:</strong>
-                    <span>{guestPassword}</span>
+                    <strong className="mr-2 text-slate-800 dark:text-gray-200">Password:</strong>
+                    <span className="text-slate-800 dark:text-gray-100">{guestPassword}</span>
                     <button
                         className="ml-2 text-gray-500"
                         onClick={() => handleCopy(guestPassword, 'password')}

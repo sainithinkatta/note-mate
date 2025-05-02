@@ -33,7 +33,6 @@ function AddEditNotes({
             if (response.data && response.data.note) {
                 getAllNotes();
                 setToastMessage('New Note added Successfully');
-                
                 onClose();
             }
         } catch (error) {
@@ -56,10 +55,8 @@ function AddEditNotes({
             if (response.data && response.data.note) {
                 getAllNotes();
                 setToastMessage('Note updated Successfully');
-
                 onClose();
             }
-
         } catch (error) {
             if (error.response && error.response.data && error.response.data.message) {
                 setError(error.response.data.message);
@@ -74,24 +71,21 @@ function AddEditNotes({
             setError('Please enter the title');
             return;
         }
-
         if (!content) {
             setError('Please enter the content');
             return;
         }
-
         setError('');
-
         type === 'edit' ? updateNote() :  addNewNote();
     }
 
     return (
         <div>
             <div className="flex flex-col gap-2">
-                <label className="input-label">Title</label>
+                <label className="input-label text-slate-800 dark:text-gray-200">Title</label>
                 <input
                     type="text"
-                    className="text-2xl text-slate-950 outline-none"
+                    className="text-2xl text-slate-950 dark:text-gray-100 outline-none bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 p-2 rounded"
                     placeholder="Go To Gym at 5"
                     value={title}
                     onChange={({ target }) => setTitle(target.value)}
@@ -99,10 +93,9 @@ function AddEditNotes({
             </div>
 
             <div className="flex flex-col gap-2 mt-4">
-                <label className="input-label">Content</label>
+                <label className="input-label text-slate-800 dark:text-gray-200">Content</label>
                 <textarea
-                    type="text"
-                    className="text-2xl text-slate-950 outline-none bg-slate-50 p-2 rounded"
+                    className="text-2xl text-slate-950 dark:text-gray-100 outline-none bg-slate-50 dark:bg-gray-700 p-2 rounded border border-gray-300 dark:border-gray-600"
                     placeholder="Content"
                     rows={10}
                     value={content}
@@ -111,7 +104,7 @@ function AddEditNotes({
             </div>
 
             <div className="mt-3">
-                <label className="input-label">Tags</label>
+                <label className="input-label text-slate-800 dark:text-gray-200">Tags</label>
                 <TagInput tags={tags} setTags={setTags} />
             </div>
 

@@ -12,34 +12,25 @@ function Login() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [error, setError] = useState(null);
-    const [showGuestModal, setShowGuestModal] = useState(true); // State to control modal visibility
+    const [showGuestModal, setShowGuestModal] = useState(true);
 
     useEffect(() => {
-        // You can trigger this only once when the component is mounted
         setShowGuestModal(true);
     }, []);
 
     async function handleLogin(e) {
         e.preventDefault();
-
         if (!validateEmail(email)) {
             setError("Please enter a valid email address");
             return;
         }
-
         if (!password) {
             setError("Please enter the password");
             return;
         }
-
         setError("");
-
         try {
-            const response = await axiosInstance.post("/login", {
-                email: email,
-                password: password
-            });
-
+            const response = await axiosInstance.post("/login", { email, password });
             if (response.data && response.data.accessToken) {
                 localStorage.setItem("token", response.data.accessToken);
                 navigate("/dashboard");
@@ -56,8 +47,6 @@ function Login() {
     return (
         <>
             <Navbar />
-
-            {/* Conditionally render the modal */}
             {showGuestModal && (
                 <GuestLoginModal
                     onClose={() => setShowGuestModal(false)}
@@ -65,12 +54,10 @@ function Login() {
                     guestPassword="guest123"
                 />
             )}
-
             <div className="flex items-center justify-center mt-28">
-                <div className="w-96 border rounded bg-white px-7 py-10">
+                <div className="w-96 border rounded bg-white dark:bg-gray-800 px-7 py-10">
                     <form onSubmit={handleLogin}>
-                        <h4 className="text-2xl mb-7">Login</h4>
-
+                        <h4 className="text-2xl mb-7 text-gray-800 dark:text-gray-100">Login</h4>
                         <input
                             type="text"
                             placeholder="Email"
@@ -78,26 +65,17 @@ function Login() {
                             value={email}
                             onChange={(e) => setEmail(e.target.value)}
                         />
-
                         <PasswordInput
                             value={password}
                             onChange={(e) => setPassword(e.target.value)}
                         />
-
-                        {error && (
-                            <p className="text-red-500 text-xs pb-1">{error}</p>
-                        )}
-
+                        {error && <p className="text-red-500 text-xs pb-1">{error}</p>}
                         <button type="submit" className="btn-primary">
                             Login
                         </button>
-
                         <p className="text-sm text-center mt-4">
                             Not registered yet?{" "}
-                            <Link
-                                to="/signup"
-                                className="font-medium text-primary underline"
-                            >
+                            <Link to="/signup" className="font-medium text-primary underline">
                                 Create an Account
                             </Link>
                         </p>
