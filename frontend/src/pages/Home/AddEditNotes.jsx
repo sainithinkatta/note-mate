@@ -94,7 +94,7 @@ function AddEditNotes({
           ref={editorRef}
           contentEditable
           onInput={handleInput}
-          className="min-h-[200px] outline-none bg-white  border border-gray-300 dark:border-gray-600 p-2 rounded text-xs text-slate-600  dark:text-gray-100"
+          className="min-h-[200px] text-xs text-slate-600 dark:text-gray-100 outline-none bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 p-2 rounded"
         />
 
         <div>
