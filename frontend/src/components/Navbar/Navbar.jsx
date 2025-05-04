@@ -94,6 +94,12 @@ function Navbar({ userInfo, onSearchNote }) {
                     <FaBars size={20} className="text-black dark:text-white" />
                 </button>
             </div>
+
+            { menuOpen && (
+                <div className="absolute top-14 right-4 bg-white dark:bg-gray-700 shadow-lg rounded p-4 w-35 space-y-4 z-50">
+                    <ProfileInfo userInfo={userInfo} onLogout={onLogout} />
+                </div>
+            )}
         </header>
     );
 }
