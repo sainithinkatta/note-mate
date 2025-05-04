@@ -81,7 +81,7 @@ function AddEditNotes({
         <input
           type="text"
           className="text-xl text-slate-950 dark:text-gray-100 outline-none bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 p-2 rounded"
-          placeholder="Go to Gym at 5"
+          placeholder="Enter note title..."
           value={title}
           onChange={e => setTitle(e.target.value)}
         />
@@ -90,12 +90,23 @@ function AddEditNotes({
       {/* Content */}
       <div className="flex flex-col gap-2 mt-4">
         <label className="text-black dark:text-gray-200">Content</label>
-        <div
-          ref={editorRef}
-          contentEditable
-          onInput={handleInput}
-          className="min-h-[200px] text-xs text-slate-600 dark:text-gray-100 outline-none bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 p-2 rounded"
-        />
+        <div className="relative min-h-[200px]">
+          {/* Placeholder */}
+          { !content && (
+            <span className="absolute left-3 top-2 text-slate-400 dark:text-gray-500 pointer-events-none select-none">
+              Enter note content...
+            </span>
+          )}
+
+          {/* Content Editable */}
+          <div
+            ref={editorRef}
+            contentEditable
+            onInput={handleInput}
+            className="min-h-[200px] text-xs text-slate-800 dark:text-gray-100 outline-none bg-gray-100 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 p-2 rounded"
+          />
+        </div>
+
 
         <div>
           <button
