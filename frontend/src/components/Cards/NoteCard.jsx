@@ -8,7 +8,7 @@ function NoteCard({
   onPinNote
 }) {
   return (
-    <div className="border rounded p-4 bg-white dark:bg-gray-700 hover:shadow-xl transition-all ease-in-out">
+    <div className="border rounded p-4 mx-2 sm:mx-0 bg-white dark:bg-gray-700 hover:shadow-xl transition-all ease-in-out">
       <div className="flex items-center justify-between">
         <h6 className="text-sm font-medium text-slate-800 dark:text-gray-200">
           {note.title}
@@ -26,7 +26,6 @@ function NoteCard({
 
       <div className="text-xs text-slate-600 dark:text-gray-300 mt-2 overflow-hidden">
         <div
-          // dangerouslySetInnerHTML will render saved <b> and <i> tags.
           dangerouslySetInnerHTML={{
             __html: note.content.length > 100
               ? note.content.slice(0, 100) + '…'

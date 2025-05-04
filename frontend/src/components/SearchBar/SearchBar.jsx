@@ -13,7 +13,7 @@ function SearchBar({
     };
 
     return (
-        <div className="w-80 flex items-center px-4 bg-slate-100 dark:bg-gray-700 rounded-md">
+        <div className="w-full max-w-[160px] sm:max-w-xs md:max-w-sm flex items-center px-4 bg-slate-100 dark:bg-gray-700 rounded-md">
             <input
                 type="text"
                 placeholder="Search Notes"
